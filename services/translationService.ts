@@ -21,7 +21,7 @@ export async function translateText(text: string, targetLanguage: string): Promi
   }
 
   try {
-    const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
+    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
     
     const prompt = `Translate the following Catholic Mass text to ${targetLanguage}. Maintain the sacred and liturgical tone. Only return the translated text without any additional commentary: "${text}"`;
     
@@ -42,7 +42,7 @@ export async function generateHomily(readings: string, saint: string): Promise<s
   }
 
   try {
-    const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
+    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
     
     const prompt = `Write a thoughtful Catholic homily based on today's Mass readings and saint. Keep it inspiring, pastoral, and around 400-500 words. Focus on practical applications for daily Christian life.
 
@@ -78,7 +78,7 @@ export async function generateSaintPrayer(saintName: string): Promise<string> {
   }
 
   try {
-    const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
+    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
     
     const prompt = `Write a short, beautiful Catholic prayer to ${saintName}. The prayer should:
 1. Be 2-3 sentences long
