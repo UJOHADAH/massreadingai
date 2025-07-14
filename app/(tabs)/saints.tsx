@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, ScrollView, StyleSheet, RefreshControl, Image } from 'react-native';
 import { Star, Calendar } from 'lucide-react-native';
 import { fetchSaintOfTheDay } from '@/services/saintsService';
-import { translateText } from '@/services/translationService';
+import { translateText, generateSaintPrayer } from '@/services/translationService';
 import { Saint } from '@/types/readings';
 import { useLanguage } from '@/contexts/LanguageContext';
 import LoadingSpinner from '@/components/LoadingSpinner';
@@ -11,6 +11,8 @@ import LanguageSelector from '@/components/LanguageSelector';
 export default function SaintsTab() {
   const [saint, setSaint] = useState<Saint | null>(null);
   const [translatedSaint, setTranslatedSaint] = useState<Saint | null>(null);
+  const [prayer, setPrayer] = useState<string>('');
+  const [translatedPrayer, setTranslatedPrayer] = useState<string>('');
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [translating, setTranslating] = useState(false);
@@ -21,10 +23,15 @@ export default function SaintsTab() {
       const data = await fetchSaintOfTheDay();
       setSaint(data);
       
+      // Generate prayer for the saint
+      const saintPrayer = await generateSaintPrayer(data.name);
+      setPrayer(saintPrayer);
+      
       if (currentLanguage !== 'en') {
-        await translateSaint(data);
+        await translateSaint(data, saintPrayer);
       } else {
         setTranslatedSaint(data);
+        setTranslatedPrayer(saintPrayer);
       }
     } catch (error) {
       console.error('Error loading saint:', error);
@@ -34,9 +41,10 @@ export default function SaintsTab() {
     }
   };
 
-  const translateSaint = async (saintData: Saint) => {
+  const translateSaint = async (saintData: Saint, prayerText: string = prayer) => {
     if (currentLanguage === 'en') {
       setTranslatedSaint(saintData);
+      setTranslatedPrayer(prayerText);
       return;
     }
 
@@ -49,10 +57,14 @@ export default function SaintsTab() {
         biography: await translateText(saintData.biography, currentLanguage),
       };
 
+      const translatedPrayerText = await translateText(prayerText, currentLanguage);
+
       setTranslatedSaint(translated);
+      setTranslatedPrayer(translatedPrayerText);
     } catch (error) {
       console.error('Translation error:', error);
       setTranslatedSaint(saintData);
+      setTranslatedPrayer(prayerText);
     } finally {
       setTranslating(false);
     }
@@ -64,7 +76,7 @@ export default function SaintsTab() {
 
   useEffect(() => {
     if (saint) {
-      translateSaint(saint);
+      translateSaint(saint, prayer);
     }
   }, [currentLanguage]);
 
@@ -131,7 +143,7 @@ export default function SaintsTab() {
               <View style={styles.prayerSection}>
                 <Text style={styles.prayerTitle}>Prayer</Text>
                 <Text style={styles.prayerText}>
-                  {displaySaint.name}, pray for us. Help us to follow your example of faith and devotion to God. May we live lives of holiness and service to others, just as you did. Amen.
+                  {translatedPrayer || prayer}
                 </Text>
               </View>
             </View>
