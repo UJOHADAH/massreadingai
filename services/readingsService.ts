@@ -8,10 +8,8 @@ function cleanHtmlText(htmlText: string): string {
     // Remove HTML tags
     .replace(/<[^>]*>/g, '')
     // Decode HTML entities
-    .replace(/&#x2018;/g, ''')
-    )
-    .replace(/&#x2019;/g, ''')
-    )
+    .replace(/&#x2018;/g, "'")
+    .replace(/&#x2019;/g, "'")
     .replace(/&#x201c;/g, '"')
     .replace(/&#x201d;/g, '"')
     .replace(/&#x2010;/g, '–')
