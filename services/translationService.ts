@@ -1,11 +1,22 @@
-import { GoogleGenerativeAI } from '@google/generative-ai';
+let GoogleGenerativeAI: any;
+let genAI: any;
 
-// Initialize Gemini AI
-const genAI = new GoogleGenerativeAI(process.env.EXPO_PUBLIC_GEMINI_API_KEY || '');
+// Dynamically import Google Generative AI to handle missing dependency gracefully
+try {
+  const { GoogleGenerativeAI: GAI } = require('@google/generative-ai');
+  GoogleGenerativeAI = GAI;
+  genAI = new GoogleGenerativeAI(process.env.EXPO_PUBLIC_GEMINI_API_KEY || '');
+} catch (error) {
+  console.warn('Google Generative AI not available:', error);
+}
+
+function isGeminiAvailable(): boolean {
+  return !!(GoogleGenerativeAI && process.env.EXPO_PUBLIC_GEMINI_API_KEY && genAI);
+}
 
 export async function translateText(text: string, targetLanguage: string): Promise<string> {
-  if (!process.env.EXPO_PUBLIC_GEMINI_API_KEY) {
-    console.warn('Gemini API key not found. Translation disabled.');
+  if (!isGeminiAvailable()) {
+    console.warn('Gemini AI not available or API key not found. Translation disabled.');
     return text;
   }
 
@@ -26,8 +37,8 @@ export async function translateText(text: string, targetLanguage: string): Promi
 }
 
 export async function generateHomily(readings: string, saint: string): Promise<string> {
-  if (!process.env.EXPO_PUBLIC_GEMINI_API_KEY) {
-    return "Please configure your Gemini API key to generate homilies.";
+  if (!isGeminiAvailable()) {
+    return "Please configure your Gemini API key to generate homilies. You can get one from https://makersuite.google.com/app/apikey";
   }
 
   try {
@@ -62,7 +73,7 @@ Write in a warm, pastoral tone suitable for a diverse congregation.`;
 }
 
 export async function generateSaintPrayer(saintName: string): Promise<string> {
-  if (!process.env.EXPO_PUBLIC_GEMINI_API_KEY) {
+  if (!isGeminiAvailable()) {
     return `${saintName}, pray for us. Help us to follow your example of faith and devotion to God. May we live lives of holiness and service to others, just as you did. Amen.`;
   }
 

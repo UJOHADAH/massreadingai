@@ -1,11 +1,23 @@
-import { GoogleGenerativeAI } from '@google/generative-ai';
 import { Saint } from '@/types/readings';
 
-// Initialize Gemini AI
-const genAI = new GoogleGenerativeAI(process.env.EXPO_PUBLIC_GEMINI_API_KEY || '');
+let GoogleGenerativeAI: any;
+let genAI: any;
+
+// Dynamically import Google Generative AI to handle missing dependency gracefully
+try {
+  const { GoogleGenerativeAI: GAI } = require('@google/generative-ai');
+  GoogleGenerativeAI = GAI;
+  genAI = new GoogleGenerativeAI(process.env.EXPO_PUBLIC_GEMINI_API_KEY || '');
+} catch (error) {
+  console.warn('Google Generative AI not available:', error);
+}
+
+function isGeminiAvailable(): boolean {
+  return !!(GoogleGenerativeAI && process.env.EXPO_PUBLIC_GEMINI_API_KEY && genAI);
+}
 
 export async function fetchSaintOfTheDay(): Promise<Saint> {
-  if (!process.env.EXPO_PUBLIC_GEMINI_API_KEY) {
+  if (!isGeminiAvailable()) {
     console.warn('Gemini API key not found. Using default saint data.');
     return getDefaultSaint();
   }
