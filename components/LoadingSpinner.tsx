@@ -17,6 +17,7 @@ export default function LoadingSpinner({ message = 'Loading...' }: LoadingSpinne
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#000000',
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
@@ -24,7 +25,7 @@ const styles = StyleSheet.create({
   message: {
     marginTop: 16,
     fontSize: 16,
-    color: '#6B7280',
+    color: '#cccccc',
     textAlign: 'center',
   },
 });

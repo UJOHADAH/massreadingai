@@ -192,7 +192,7 @@ function ReadingSection({ title, source, text, isGospel = false }: {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F9FAFB',
+    backgroundColor: '#000000',
   },
   header: {
     flexDirection: 'row',
@@ -201,9 +201,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingTop: 60,
     paddingBottom: 20,
-    backgroundColor: 'white',
+    backgroundColor: '#1a1a1a',
     borderBottomWidth: 1,
-    borderBottomColor: '#E5E7EB',
+    borderBottomColor: '#333333',
   },
   headerLeft: {
     flexDirection: 'row',
@@ -213,11 +213,11 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#1F2937',
+    color: '#ffffff',
   },
   headerDate: {
     fontSize: 14,
-    color: '#6B7280',
+    color: '#cccccc',
   },
   headerRight: {
     flexDirection: 'row',
@@ -228,12 +228,12 @@ const styles = StyleSheet.create({
     padding: 8,
   },
   translatingBanner: {
-    backgroundColor: '#FEF3C7',
+    backgroundColor: '#2a2a2a',
     paddingVertical: 8,
     paddingHorizontal: 20,
   },
   translatingText: {
-    color: '#92400E',
+    color: '#8B5CF6',
     fontSize: 14,
     textAlign: 'center',
   },
@@ -244,15 +244,17 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   readingSection: {
-    backgroundColor: 'white',
+    backgroundColor: '#1a1a1a',
     borderRadius: 12,
     padding: 20,
     marginBottom: 16,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
+    shadowOpacity: 0.3,
     shadowRadius: 4,
     elevation: 3,
+    borderWidth: 1,
+    borderColor: '#333333',
   },
   gospelSection: {
     borderLeftWidth: 4,
@@ -261,7 +263,7 @@ const styles = StyleSheet.create({
   readingTitle: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#1F2937',
+    color: '#ffffff',
     marginBottom: 8,
   },
   gospelTitle: {
@@ -276,20 +278,23 @@ const styles = StyleSheet.create({
   readingText: {
     fontSize: 16,
     lineHeight: 24,
-    color: '#374151',
+    color: '#e5e5e5',
   },
   gospelText: {
     fontWeight: '500',
+    color: '#ffffff',
   },
   copyright: {
     marginTop: 20,
     padding: 16,
-    backgroundColor: '#F3F4F6',
+    backgroundColor: '#2a2a2a',
     borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#333333',
   },
   copyrightText: {
     fontSize: 12,
-    color: '#6B7280',
+    color: '#999999',
     textAlign: 'center',
   },
 });

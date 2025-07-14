@@ -157,7 +157,7 @@ export default function SaintsTab() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F9FAFB',
+    backgroundColor: '#000000',
   },
   header: {
     flexDirection: 'row',
@@ -166,9 +166,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingTop: 60,
     paddingBottom: 20,
-    backgroundColor: 'white',
+    backgroundColor: '#1a1a1a',
     borderBottomWidth: 1,
-    borderBottomColor: '#E5E7EB',
+    borderBottomColor: '#333333',
   },
   headerLeft: {
     flexDirection: 'row',
@@ -178,19 +178,19 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#1F2937',
+    color: '#ffffff',
   },
   headerDate: {
     fontSize: 14,
-    color: '#6B7280',
+    color: '#cccccc',
   },
   translatingBanner: {
-    backgroundColor: '#FEF3C7',
+    backgroundColor: '#2a2a2a',
     paddingVertical: 8,
     paddingHorizontal: 20,
   },
   translatingText: {
-    color: '#92400E',
+    color: '#8B5CF6',
     fontSize: 14,
     textAlign: 'center',
   },
@@ -201,14 +201,16 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   saintCard: {
-    backgroundColor: 'white',
+    backgroundColor: '#1a1a1a',
     borderRadius: 12,
     padding: 20,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
+    shadowOpacity: 0.3,
     shadowRadius: 4,
     elevation: 3,
+    borderWidth: 1,
+    borderColor: '#333333',
   },
   saintHeader: {
     flexDirection: 'row',
@@ -227,18 +229,20 @@ const styles = StyleSheet.create({
   saintName: {
     fontSize: 20,
     fontWeight: '600',
-    color: '#1F2937',
+    color: '#ffffff',
     marginBottom: 8,
   },
   feastBadge: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#F3F4F6',
+    backgroundColor: '#2a2a2a',
     paddingHorizontal: 12,
     paddingVertical: 6,
     borderRadius: 16,
     alignSelf: 'flex-start',
     gap: 6,
+    borderWidth: 1,
+    borderColor: '#333333',
   },
   feastText: {
     fontSize: 14,
@@ -247,7 +251,7 @@ const styles = StyleSheet.create({
   },
   description: {
     fontSize: 16,
-    color: '#6B7280',
+    color: '#cccccc',
     marginBottom: 20,
     fontStyle: 'italic',
   },
@@ -257,20 +261,22 @@ const styles = StyleSheet.create({
   biographyTitle: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#1F2937',
+    color: '#ffffff',
     marginBottom: 12,
   },
   biographyText: {
     fontSize: 16,
     lineHeight: 24,
-    color: '#374151',
+    color: '#e5e5e5',
   },
   prayerSection: {
-    backgroundColor: '#F8FAFC',
+    backgroundColor: '#2a2a2a',
     padding: 16,
     borderRadius: 8,
     borderLeftWidth: 4,
     borderLeftColor: '#8B5CF6',
+    borderWidth: 1,
+    borderColor: '#333333',
   },
   prayerTitle: {
     fontSize: 16,
@@ -281,7 +287,7 @@ const styles = StyleSheet.create({
   prayerText: {
     fontSize: 15,
     lineHeight: 22,
-    color: '#475569',
+    color: '#e5e5e5',
     fontStyle: 'italic',
   },
 });

@@ -173,7 +173,7 @@ export default function HomilyTab() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F9FAFB',
+    backgroundColor: '#000000',
   },
   header: {
     flexDirection: 'row',
@@ -182,9 +182,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingTop: 60,
     paddingBottom: 20,
-    backgroundColor: 'white',
+    backgroundColor: '#1a1a1a',
     borderBottomWidth: 1,
-    borderBottomColor: '#E5E7EB',
+    borderBottomColor: '#333333',
   },
   headerLeft: {
     flexDirection: 'row',
@@ -194,11 +194,11 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#1F2937',
+    color: '#ffffff',
   },
   headerSubtitle: {
     fontSize: 14,
-    color: '#6B7280',
+    color: '#cccccc',
   },
   headerRight: {
     flexDirection: 'row',
@@ -209,12 +209,12 @@ const styles = StyleSheet.create({
     padding: 8,
   },
   statusBanner: {
-    backgroundColor: '#EEF2FF',
+    backgroundColor: '#2a2a2a',
     paddingVertical: 8,
     paddingHorizontal: 20,
   },
   statusText: {
-    color: '#6366F1',
+    color: '#8B5CF6',
     fontSize: 14,
     textAlign: 'center',
   },
@@ -225,15 +225,17 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   homilyCard: {
-    backgroundColor: 'white',
+    backgroundColor: '#1a1a1a',
     borderRadius: 12,
     padding: 20,
     marginBottom: 16,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
+    shadowOpacity: 0.3,
     shadowRadius: 4,
     elevation: 3,
+    borderWidth: 1,
+    borderColor: '#333333',
   },
   homilyHeader: {
     flexDirection: 'row',
@@ -244,12 +246,12 @@ const styles = StyleSheet.create({
   homilyTitle: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#1F2937',
+    color: '#ffffff',
   },
   homilyText: {
     fontSize: 16,
     lineHeight: 26,
-    color: '#374151',
+    color: '#e5e5e5',
     marginBottom: 20,
   },
   footer: {
@@ -258,7 +260,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: 16,
     borderTopWidth: 1,
-    borderTopColor: '#E5E7EB',
+    borderTopColor: '#333333',
   },
   aiNotice: {
     flexDirection: 'row',
@@ -275,8 +277,10 @@ const styles = StyleSheet.create({
     gap: 6,
     paddingHorizontal: 12,
     paddingVertical: 6,
-    backgroundColor: '#F3F4F6',
+    backgroundColor: '#2a2a2a',
     borderRadius: 6,
+    borderWidth: 1,
+    borderColor: '#333333',
   },
   regenerateText: {
     fontSize: 14,
@@ -284,21 +288,23 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   disclaimerCard: {
-    backgroundColor: '#FEF3C7',
+    backgroundColor: '#2a2a2a',
     borderRadius: 8,
     padding: 16,
     borderLeftWidth: 4,
-    borderLeftColor: '#F59E0B',
+    borderLeftColor: '#8B5CF6',
+    borderWidth: 1,
+    borderColor: '#333333',
   },
   disclaimerTitle: {
     fontSize: 14,
     fontWeight: '600',
-    color: '#92400E',
+    color: '#8B5CF6',
     marginBottom: 8,
   },
   disclaimerText: {
     fontSize: 13,
     lineHeight: 18,
-    color: '#78350F',
+    color: '#cccccc',
   },
 });
