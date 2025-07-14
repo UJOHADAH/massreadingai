@@ -1,11 +1,16 @@
 import { ReadingData } from '@/types/readings';
 
-// Helper function to clean HTML content
+// Enhanced HTML cleaning function
 function cleanHtmlText(htmlText: string): string {
   if (!htmlText) return '';
   
   return htmlText
-    // Remove HTML tags
+    // Remove HTML tags and their content for specific elements
+    .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '')
+    .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '')
+    .replace(/<div[^>]*style="text-indent:[^"]*"[^>]*>/gi, '')
+    .replace(/<\/div>/gi, '')
+    // Remove all HTML tags
     .replace(/<[^>]*>/g, '')
     // Decode HTML entities
     .replace(/&#x2018;/g, "'")
@@ -17,14 +22,34 @@ function cleanHtmlText(htmlText: string): string {
     .replace(/&#x2014;/g, '—')
     .replace(/&#xa9;/g, '©')
     .replace(/&#160;/g, ' ')
+    .replace(/&#8220;/g, '"')
+    .replace(/&#8221;/g, '"')
+    .replace(/&#8217;/g, "'")
+    .replace(/&#8216;/g, "'")
+    .replace(/&#8211;/g, '–')
+    .replace(/&#8212;/g, '—')
+    .replace(/&nbsp;/g, ' ')
     .replace(/&amp;/g, '&')
     .replace(/&lt;/g, '<')
     .replace(/&gt;/g, '>')
     .replace(/&quot;/g, '"')
     .replace(/&apos;/g, "'")
-    // Clean up extra whitespace
-    .replace(/\s+/g, ' ')
-    .trim();
+    // Clean up formatting artifacts
+    .replace(/\s*\n\s*/g, ' ')
+    .replace(/\s{2,}/g, ' ')
+    // Remove common formatting patterns
+    .replace(/^\s*[-•]\s*/gm, '')
+    .replace(/^\s*\d+\.\s*/gm, '')
+    // Clean up verse numbers and references
+    .replace(/\s*\[\d+\]\s*/g, ' ')
+    .replace(/\s*\(\d+\)\s*/g, ' ')
+    // Final cleanup
+    .trim()
+    // Ensure proper sentence spacing
+    .replace(/([.!?])\s*([A-Z])/g, '$1 $2')
+    // Remove extra spaces around punctuation
+    .replace(/\s+([,.;:!?])/g, '$1')
+    .replace(/([,.;:!?])\s+/g, '$1 ');
 }
 
 export async function fetchReadings(): Promise<ReadingData> {
