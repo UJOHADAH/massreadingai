@@ -27,7 +27,7 @@ export async function fetchSaintOfTheDay(): Promise<Saint> {
   const day = today.getDate();
 
   try {
-    const model = genAI.getGenerativeModel({ model: 'gemini-1.0-pro' });
+    const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
     
     const prompt = `Generate information about the Catholic saint celebrated on ${month} ${day}. If there are multiple saints, choose the most prominent one. Please provide the response in this exact JSON format:
 
