@@ -1,9 +1,11 @@
+import { GoogleGenerativeAI } from '@google/generative-ai';
 import { Saint } from '@/types/readings';
 
-const GEMINI_API_KEY = process.env.EXPO_PUBLIC_GEMINI_API_KEY;
+// Initialize Gemini AI
+const genAI = new GoogleGenerativeAI(process.env.EXPO_PUBLIC_GEMINI_API_KEY || '');
 
 export async function fetchSaintOfTheDay(): Promise<Saint> {
-  if (!GEMINI_API_KEY) {
+  if (!process.env.EXPO_PUBLIC_GEMINI_API_KEY) {
     console.warn('Gemini API key not found. Using default saint data.');
     return getDefaultSaint();
   }
@@ -13,15 +15,9 @@ export async function fetchSaintOfTheDay(): Promise<Saint> {
   const day = today.getDate();
 
   try {
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${GEMINI_API_KEY}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        contents: [{
-          parts: [{
-            text: `Generate information about the Catholic saint celebrated on ${month} ${day}. If there are multiple saints, choose the most prominent one. Please provide the response in this exact JSON format:
+    const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
+    
+    const prompt = `Generate information about the Catholic saint celebrated on ${month} ${day}. If there are multiple saints, choose the most prominent one. Please provide the response in this exact JSON format:
 
 {
   "name": "Saint Name",
@@ -30,14 +26,11 @@ export async function fetchSaintOfTheDay(): Promise<Saint> {
   "biography": "Detailed biography (2-3 paragraphs) about their life, works, and significance in Catholic tradition"
 }
 
-Make sure the biography is informative and inspiring, suitable for Catholic devotion.`
-          }]
-        }]
-      })
-    });
+Make sure the biography is informative and inspiring, suitable for Catholic devotion.`;
 
-    const data = await response.json();
-    const responseText = data.candidates?.[0]?.content?.parts?.[0]?.text;
+    const result = await model.generateContent(prompt);
+    const response = await result.response;
+    const responseText = response.text();
     
     if (responseText) {
       try {
